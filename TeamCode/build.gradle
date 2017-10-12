@@ -15,4 +15,5 @@ android {
     compileSdkVersion 23
 }
 dependencies {
+    compile project(':openCVLibrary330')
 }
