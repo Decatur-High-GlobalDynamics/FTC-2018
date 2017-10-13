@@ -68,8 +68,8 @@ public class OPMODEJESUS
       // Un-comment any line to enable that sample.
       // Or add your own lines to register your Team opmodes.
 
-
-         manager.register("BaseOpMode",            BaseOpMode.class);
+        manager.register("Teleop",                  Teleop5177.class);
+       //  manager.register("BaseOpMode",            BaseOpMode.class);
   }
 }
  

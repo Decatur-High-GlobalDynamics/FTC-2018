@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -29,11 +30,13 @@ public class Hardware5177
     public DcMotor  frontRightMotor  = null;
     public DcMotor  backLeftMotor = null;
     public DcMotor  backRightMotor = null;
+    public DcMotor  rightMotor = null;
+    public DcMotor  leftMotor = null;
     public DcMotor  liftMotor = null;
     public Servo    leftGrabber;
-    public Servo    rightGrabber;
+    public Servo    rightGrabber;/*
     public Servo    jewelHitter;
-    public ColorSensor jewelSensor;
+    public ColorSensor jewelSensor;*/
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -50,40 +53,49 @@ public class Hardware5177
         hwMap = ahwMap;
 
         // Define and Initialize Motors
-        frontLeftMotor = hwMap.dcMotor.get("fl");
+        /*frontLeftMotor = hwMap.dcMotor.get("fl");
         frontRightMotor = hwMap.dcMotor.get("fr");
         backLeftMotor = hwMap.dcMotor.get("bl");
-        backRightMotor = hwMap.dcMotor.get("br");
-        liftMotor = hwMap.dcMotor.get("lift");
-        frontLeftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
+        backRightMotor = hwMap.dcMotor.get("br");*/
+        leftMotor = hwMap.dcMotor.get("left");
+        rightMotor = hwMap.dcMotor.get("right");
+       // liftMotor = hwMap.dcMotor.get("lift");
+       /* frontLeftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
         backRightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
-
+        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);*/
+        leftMotor.setDirection(DcMotor.Direction.FORWARD);
+        rightMotor.setDirection(DcMotor.Direction.REVERSE);
+        //rightMotor.setDirection(DcMotor.Direction.FORWARD);
         // Set all motors to zero power
-        frontLeftMotor.setPower(0);
+        /*frontLeftMotor.setPower(0);
         frontRightMotor.setPower(0);
         backLeftMotor.setPower(0);
-        backRightMotor.setPower(0);
-        liftMotor.setPower(0);
+        backRightMotor.setPower(0);*/
+       // liftMotor.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+       /* frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        */
+       // liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
         // Define and initialize ALL installed servos.
-        // leftGrabber = hwMap.servo.get("leftG");
-        // rightGrabber = hwMap.servo.get("rightG");
+       // leftGrabber = hwMap.servo.get("leftG");
+        //rightGrabber = hwMap.servo.get("rightG");
         // jewelHitter = hwMap.servo.get("jewelS");
         // Define All Sensors Here
         // jewelSensor = hwMap.colorSensor.get("jewelCS");
     }
 
     /***
+     *
      *
      * waitForTick implements a periodic delay. However, this acts like a metronome with a regular
      * periodic tick.  This is used to compensate for varying processing times for each cycle.
