@@ -15,15 +15,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class MainTeleop extends OpMode {
     private double leftThrottle;
     private double rightThrottle;
-    private ElapsedTime runtime = new ElapsedTime();
     Hardware4232 robot = new Hardware4232();
-    private boolean brakes = false;
     @Override
     public void init(){
-
+        robot.init(hardwareMap);
         leftThrottle = 0;
         rightThrottle = 0;
-        robot.init(hardwareMap);
     }
 
     @Override
@@ -32,44 +29,29 @@ public class MainTeleop extends OpMode {
 
     @Override
     public void start(){
-        runtime.reset();
 
-}
+    }
 
     @Override
     public void loop() {
-        leftThrottle = -gamepad1.left_stick_y;
-        rightThrottle = -gamepad1.right_stick_y;
-        robot.intakeLeft.setPower(0);
-        robot.intakeRight.setPower(0);
-        if(gamepad1.a){
-            brakes = !brakes;
+        leftThrottle = gamepad1.left_stick_y;
+        rightThrottle = gamepad1.right_stick_y;
+
+        robot.grabWheels.setPower(0);
+        if(gamepad2.left_bumper){
+            robot.grabWheels.setPower(-.5);
         }
-        if(brakes == true && -gamepad1.left_stick_y == 0 && -gamepad1.right_stick_y == 0 && robot.leftMotor.getCurrentPosition() != 0 && robot.rightMotor.getCurrentPosition() != 0){
-            leftThrottle = -.1;
-            rightThrottle = -.1;
-            resetDriveEncoders();
+        if(gamepad2.right_bumper){
+            robot.grabWheels.setPower(.5);
         }
-        if(gamepad1.left_bumper){
-            robot.intakeLeft.setPower(.5);
-            robot.intakeRight.setPower(.5);
+        robot.Lifter.setPower(0);
+        if(gamepad2.dpad_up){
+            robot.Lifter.setPower(.5);
         }
-        if(gamepad1.right_bumper){
-            robot.intakeLeft.setPower(-.5);
-            robot.intakeRight.setPower(-.5);
+        if(gamepad2.dpad_down){
+            robot.Lifter.setPower(-.5);
         }
 
-
-      /*  if(gamepad1.a){
-
-            robot.leftMotor.setDirection(DcMotor.Direction.REVERSE);
-            robot.rightMotor.setDirection(DcMotor.Direction.FORWARD);
-        }
-        else {
-            robot.leftMotor.setDirection(DcMotor.Direction.FORWARD);
-            robot.rightMotor.setDirection(DcMotor.Direction.REVERSE);
-        }
-*/
         robot.leftMotor.setPower(leftThrottle);
         robot.rightMotor.setPower(rightThrottle);
     }
@@ -79,9 +61,6 @@ public class MainTeleop extends OpMode {
         robot.leftMotor.setPower(0);
         robot.rightMotor.setPower(0);
     }
-    void resetDriveEncoders(){
-        robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-    }
+
 
 }
