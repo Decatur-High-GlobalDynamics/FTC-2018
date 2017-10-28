@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -24,6 +25,8 @@ public class Teleop5177 extends OpMode{
     private double lGrabberValue;
     private double rGrabberValue;
     private double averageEncoders;
+    double crValue;
+    double crExit;
     private boolean mecanumToggle;
     Hardware5177 robot = new Hardware5177();
     @Override
@@ -112,9 +115,18 @@ public class Teleop5177 extends OpMode{
         rightThrottle = -gamepad1.right_stick_y;
         lGrabberValue = gamepad1.left_trigger;
         rGrabberValue = -gamepad1.right_trigger +1;
-
+        crValue = crExit;
+        if(gamepad1.right_bumper){
+            robot.spindleSpin.setDirection(CRServo.Direction.FORWARD);
+            crExit=1;
+        }
+        if(gamepad1.left_bumper){
+            robot.spindleSpin.setDirection(CRServo.Direction.REVERSE);
+            crExit=1;
+        }
         robot.rightMotor.setPower(rightThrottle);
         robot.leftMotor.setPower(leftThrottle);
+        robot.spindleSpin.setPower(crValue);
        /* robot.leftGrabber.setPosition(lGrabberValue);
         robot.rightGrabber.setPosition(rGrabberValue);*/
            /* robot.frontLeftMotor.setPower(leftThrottle);

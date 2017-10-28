@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -34,7 +35,9 @@ public class Hardware5177
     public DcMotor  leftMotor = null;
     public DcMotor  liftMotor = null;
     public Servo    leftGrabber;
-    public Servo    rightGrabber;/*
+    public Servo    rightGrabber;
+    public CRServo  spindleSpin;
+    /*
     public Servo    jewelHitter;
     public ColorSensor jewelSensor;*/
 
@@ -88,7 +91,8 @@ public class Hardware5177
 
         // Define and initialize ALL installed servos.
        // leftGrabber = hwMap.servo.get("leftG");
-        //rightGrabber = hwMap.servo.get("rightG");
+        // rightGrabber = hwMap.servo.get("rightG");
+        spindleSpin = hwMap.crservo.get("cr");
         // jewelHitter = hwMap.servo.get("jewelS");
         // Define All Sensors Here
         // jewelSensor = hwMap.colorSensor.get("jewelCS");
