@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -50,29 +51,11 @@ public class Auto5177 extends OpMode
     @Override
     public void loop() {
         telemetry.addData("Status", "Running: " + runtime.toString());
-        switch (autoState) {
-            case 0:
+        robot.leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.leftMotor.setTargetPosition(500);
+        robot.rightMotor.setTargetPosition(500);
 
-                if (runtime.seconds()<3){
-
-
-                    robot.leftMotor.setPower(50);
-                    robot.rightMotor.setPower(50);
-
-
-                }
-                else
-                {
-                    autoState++;
-                }
-                break;
-            case 1:
-                robot.leftMotor.setPower(0);
-                robot.rightMotor.setPower(0);
-                break;
-
-
-        }
         telemetry.addData("StopMotors", stopMotors);
         if (autoState == 2) {
             requestOpModeStop();

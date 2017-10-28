@@ -116,12 +116,13 @@ public class Teleop5177 extends OpMode{
         lGrabberValue = gamepad1.left_trigger;
         rGrabberValue = -gamepad1.right_trigger +1;
         crValue = crExit;
+        robot.spindleSpin.setPower(0);
         if(gamepad1.right_bumper){
-            robot.spindleSpin.setDirection(CRServo.Direction.FORWARD);
+            robot.spindleSpin.setDirection(DcMotor.Direction.FORWARD);
             crExit=1;
         }
         if(gamepad1.left_bumper){
-            robot.spindleSpin.setDirection(CRServo.Direction.REVERSE);
+            robot.spindleSpin.setDirection(DcMotor.Direction.REVERSE);
             crExit=1;
         }
         robot.rightMotor.setPower(rightThrottle);

@@ -69,6 +69,7 @@ public class OPMODEJESUS
       // Or add your own lines to register your Team opmodes.
 
         manager.register("Teleop",                  Teleop5177.class);
+        manager.register("SafeZoneAuto",            Auto5177.class);
        //  manager.register("BaseOpMode",            BaseOpMode.class);
   }
 }

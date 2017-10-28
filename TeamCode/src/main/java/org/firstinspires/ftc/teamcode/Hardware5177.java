@@ -36,7 +36,7 @@ public class Hardware5177
     public DcMotor  liftMotor = null;
     public Servo    leftGrabber;
     public Servo    rightGrabber;
-    public CRServo  spindleSpin;
+    public DcMotor  spindleSpin;
     /*
     public Servo    jewelHitter;
     public ColorSensor jewelSensor;*/
@@ -62,6 +62,7 @@ public class Hardware5177
         backRightMotor = hwMap.dcMotor.get("br");*/
         leftMotor = hwMap.dcMotor.get("left");
         rightMotor = hwMap.dcMotor.get("right");
+        spindleSpin = hwMap.dcMotor.get("cr");
        // liftMotor = hwMap.dcMotor.get("lift");
        /* frontLeftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -69,6 +70,7 @@ public class Hardware5177
         frontRightMotor.setDirection(DcMotor.Direction.REVERSE);*/
         leftMotor.setDirection(DcMotor.Direction.FORWARD);
         rightMotor.setDirection(DcMotor.Direction.REVERSE);
+        spindleSpin.setDirection(DcMotor.Direction.FORWARD);
         //rightMotor.setDirection(DcMotor.Direction.FORWARD);
         // Set all motors to zero power
         /*frontLeftMotor.setPower(0);
@@ -87,12 +89,13 @@ public class Hardware5177
        // liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        spindleSpin.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
         // Define and initialize ALL installed servos.
-       // leftGrabber = hwMap.servo.get("leftG");
-        // rightGrabber = hwMap.servo.get("rightG");
-        spindleSpin = hwMap.crservo.get("cr");
+         leftGrabber = hwMap.servo.get("leftG");
+         rightGrabber = hwMap.servo.get("rightG");
+
         // jewelHitter = hwMap.servo.get("jewelS");
         // Define All Sensors Here
         // jewelSensor = hwMap.colorSensor.get("jewelCS");
