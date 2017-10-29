@@ -73,11 +73,9 @@ public class Hardware5177
         spindleSpin.setDirection(DcMotor.Direction.FORWARD);
         //rightMotor.setDirection(DcMotor.Direction.FORWARD);
         // Set all motors to zero power
-        /*frontLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        backRightMotor.setPower(0);*/
-       // liftMotor.setPower(0);
+        leftMotor.setPower(0);
+        rightMotor.setPower(0);
+        liftMotor.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
