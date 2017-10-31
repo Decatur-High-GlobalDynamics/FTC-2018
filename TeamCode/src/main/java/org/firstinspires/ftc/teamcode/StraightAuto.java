@@ -96,8 +96,9 @@ public class StraightAuto extends OpMode
      */
     @Override
     public void start() {
-        robot.leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+      //  robot.leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //robot.rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        resetEncoders();
         runtime.reset();
     }
 
@@ -107,11 +108,21 @@ public class StraightAuto extends OpMode
     @Override
     public void loop() {
         telemetry.addData("Status", "Running: " + runtime.toString());
-        robot.leftMotor.setTargetPosition(500);
-        robot.rightMotor.setTargetPosition(500);
+        robot.leftMotor.setPower(0);
+        robot.rightMotor.setPower(0);
+        if (robot.leftMotor.getCurrentPosition()<5000) {
+            robot.leftMotor.setPower(.5);
+            robot.rightMotor.setPower(.5);
+        }
+
         // eg: Run wheels in tank mode (note: The joystick goes negative when pushed forwards)
         // leftMotor.setPower(-gamepad1.left_stick_y);
         // rightMotor.setPower(-gamepad1.right_stick_y);
+        telemetry.addData("Left Power", robot.leftMotor.getPower());
+        telemetry.addData("Right Power", robot.rightMotor.getPower());
+        telemetry.addData("Left Encode", robot.leftMotor.getCurrentPosition());
+        telemetry.addData("Right Encode", robot.rightMotor.getCurrentPosition());
+        telemetry.update();
     }
 
     /*
@@ -121,4 +132,10 @@ public class StraightAuto extends OpMode
     public void stop() {
     }
 
+    void resetEncoders(){
+        robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
 }
