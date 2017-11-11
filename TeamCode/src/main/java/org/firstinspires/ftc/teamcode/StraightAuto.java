@@ -63,6 +63,8 @@ public class StraightAuto extends OpMode
     private DcMotor leftMotor = null;
     private DcMotor rightMotor = null;
     private Hardware4232 robot = new Hardware4232();
+    private double rightThrottle;
+    private double leftThrottle;
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -70,6 +72,8 @@ public class StraightAuto extends OpMode
     public void init() {
         telemetry.addData("Status", "Initialized");
         robot.init(hardwareMap);
+        rightThrottle = 0;
+        leftThrottle = 0;
         /* eg: Initialize the hardware variables. Note that the strings used here as parameters
          * to 'get' must correspond to the names assigned during the robot configuration
          * step (using the FTC Robot Controller app on the phone).
@@ -108,11 +112,11 @@ public class StraightAuto extends OpMode
     @Override
     public void loop() {
         telemetry.addData("Status", "Running: " + runtime.toString());
-        robot.leftMotor.setPower(0);
-        robot.rightMotor.setPower(0);
-        if (robot.leftMotor.getCurrentPosition()<5000) {
-            robot.leftMotor.setPower(.5);
-            robot.rightMotor.setPower(.5);
+        leftThrottle = 0;
+        rightThrottle = 0;
+        if (robot.leftMotor.getCurrentPosition()<5000 && robot.rightMotor.getCurrentPosition()<5000) {
+            leftThrottle = .5;
+            rightThrottle = .5;
         }
 
         // eg: Run wheels in tank mode (note: The joystick goes negative when pushed forwards)
@@ -123,6 +127,8 @@ public class StraightAuto extends OpMode
         telemetry.addData("Left Encode", robot.leftMotor.getCurrentPosition());
         telemetry.addData("Right Encode", robot.rightMotor.getCurrentPosition());
         telemetry.update();
+        robot.leftMotor.setPower(leftThrottle);
+        robot.rightMotor.setPower(rightThrottle);
     }
 
     /*
@@ -130,6 +136,8 @@ public class StraightAuto extends OpMode
      */
     @Override
     public void stop() {
+        robot.leftMotor.setPower(0);
+        robot.rightMotor.setPower(0);
     }
 
     void resetEncoders(){

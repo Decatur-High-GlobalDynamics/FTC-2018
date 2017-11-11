@@ -52,7 +52,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="TestOpMode", group="Iterative Opmode")  // @Autonomous(...) is the other common choice
+@TeleOp(name="TestOpModeBoth", group="Iterative Opmode")  // @Autonomous(...) is the other common choice
 
 public class TestOpMode extends OpMode
 {
@@ -103,6 +103,7 @@ public class TestOpMode extends OpMode
     @Override
     public void loop() {
         telemetry.addData("Status", "Running: " + runtime.toString());
+        robot.rightMotor.setPower(.5);
         robot.leftMotor.setPower(.5);
         // eg: Run wheels in tank mode (note: The joystick goes negative when pushed forwards)
         // leftMotor.setPower(-gamepad1.left_stick_y);
