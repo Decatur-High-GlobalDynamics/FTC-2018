@@ -36,7 +36,7 @@ public class MainTeleop extends OpMode {
     @Override
     public void loop() {
         leftThrottle = -gamepad1.left_stick_y;
-        rightThrottle = -gamepad1.right_stick_y;
+        rightThrottle = gamepad1.right_stick_y;
 
         robot.grabWheels.setPower(0);
         if(gamepad2.left_bumper){

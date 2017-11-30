@@ -105,6 +105,7 @@ public class TestOpMode extends OpMode
         telemetry.addData("Status", "Running: " + runtime.toString());
         robot.rightMotor.setPower(.5);
         robot.leftMotor.setPower(.5);
+        robot.grabWheels.setPower(.5);
         // eg: Run wheels in tank mode (note: The joystick goes negative when pushed forwards)
         // leftMotor.setPower(-gamepad1.left_stick_y);
         // rightMotor.setPower(-gamepad1.right_stick_y);
