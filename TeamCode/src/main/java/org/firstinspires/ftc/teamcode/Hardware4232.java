@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -29,6 +31,9 @@ public class Hardware4232
     public DcMotor  rightMotor  = null;
     public DcMotor  grabWheels = null;
     public DcMotor Lifter = null;
+    public ModernRoboticsI2cColorSensor color = null;
+    public ModernRoboticsI2cGyro gyro = null;
+    public Servo servo = null;
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -49,6 +54,10 @@ public class Hardware4232
         rightMotor  = hwMap.dcMotor.get("right_drive");
         grabWheels = hwMap.dcMotor.get("wheels");
         Lifter = hwMap.dcMotor.get("lifter");
+        color = hwMap.get(ModernRoboticsI2cColorSensor.class, "color");
+        gyro = hwMap.get(ModernRoboticsI2cGyro.class, "gyro");
+        servo = hwMap.get(Servo.class,"servo");
+
         leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         grabWheels.setDirection(DcMotor.Direction.FORWARD);
