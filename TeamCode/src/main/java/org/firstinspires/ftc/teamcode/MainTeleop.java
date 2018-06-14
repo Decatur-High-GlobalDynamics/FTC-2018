@@ -31,7 +31,7 @@ public class MainTeleop extends OpMode {
 
     @Override
     public void start(){
-
+        robot.arm.setPosition(0);
     }
 
     @Override
@@ -39,35 +39,26 @@ public class MainTeleop extends OpMode {
         leftThrottle = -gamepad1.left_stick_y;
         rightThrottle = -gamepad1.right_stick_y;
 
-        robot.grabWheels.setPower(0);
         servoPos = 1;
-        if(gamepad2.left_bumper){
-            robot.grabWheels.setPower(-.75);
-        }
-        if(gamepad2.right_bumper){
-            robot.grabWheels.setPower(.75);
-        }
-        robot.Lifter.setPower(0);
-        if(gamepad2.dpad_up){
-            robot.Lifter.setPower(.5);
-        }
-        if(gamepad2.dpad_down){
-            robot.Lifter.setPower(-.5);
-        }
+
         if(gamepad2.a){
             servoPos = 0;
         }
         if(gamepad2.y){
             servoPos = 1;
         }
-        robot.servo.setPosition(servoPos);
+        if(gamepad2.b){
+            robot.gyro.calibrate();
+        }
+        robot.arm.setPosition(servoPos);
         robot.leftMotor.setPower(leftThrottle);
         robot.rightMotor.setPower(rightThrottle);
         telemetry.addData("Left Throttle", leftThrottle);
         telemetry.addData("Right Throttle", rightThrottle);
-        telemetry.addData("Lifter Throttle", robot.Lifter.getPower());
-        telemetry.addData("Wheels Throttle", robot.grabWheels.getPower());
-        telemetry.addData("Servo Position", robot.servo.getPosition());
+        telemetry.addData("Gyro", robot.gyro.getHeading());
+        telemetry.addData("Red", robot.color.red());
+        telemetry.addData("Green", robot.color.green());
+        telemetry.addData("Blue", robot.color.blue());
         telemetry.update();
 
     }
